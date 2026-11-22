@@ -2,4 +2,5 @@
 
 Người phụ trách: Dương Hữu Hinh. Hoàn thiện ở Buổi 6.
 """
+
 # TODO: load model bằng joblib, đọc CSV đầu vào, trả về SalePrice dự đoán.

@@ -1,0 +1,5 @@
+[flake8]
+# Dùng cùng độ dài dòng với black (88); E203 xung đột với cách black định dạng
+max-line-length = 88
+extend-ignore = E203
+exclude = .venv,.ipynb_checkpoints,__pycache__
