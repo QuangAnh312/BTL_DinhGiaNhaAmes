@@ -1,22 +1,22 @@
 ﻿dac_trung,bien_nguon,cong_thuc,don_vi,uu_tien,y_nghia_va_gia_thuyet,xu_ly_thieu_va_ngoai_le
-TotalSF,"TotalBsmtSF, 1stFlrSF, 2ndFlrSF",TotalBsmtSF + 1stFlrSF + 2ndFlrSF,ft²,Cốt lõi,Tổng quy mô tầng hầm và hai tầng chính; gồm hầm chưa hoàn thiện,Thiếu một thành phần thì NA; không cộng thêm GrLivArea
-HouseAge,"YrSold, YearBuilt",YrSold - YearBuilt,năm,Cốt lõi,"Tuổi nhà tại năm bán, giả thuyết phản ánh hao mòn","Thiếu năm, năm không hợp lệ hoặc tuổi âm thì NA"
-RemodelAge,"YrSold, YearRemodAdd",YrSold - YearRemodAdd,năm,Cốt lõi,Thời gian từ lần cải tạo đến năm bán,Tuổi âm thì NA; giữ nguyên năm gốc để nhóm đối chiếu
+TotalSF,"TotalBsmtSF, 1stFlrSF, 2ndFlrSF",TotalBsmtSF + 1stFlrSF + 2ndFlrSF,ft²,Cốt lõi,Tổng quy mô tầng hầm và hai tầng chính; gồm hầm chưa hoàn thiện,Thiếu thành phần thì NA; không cộng thêm GrLivArea
+HouseAge,"YrSold, YearBuilt",YrSold - YearBuilt,năm,Cốt lõi,Tuổi nhà tại năm bán; có thể phản ánh hao mòn,Train có đủ năm xây và năm bán; không dùng năm hiện tại của máy
+RemodelAge,"YrSold, YearRemodAdd",YrSold - YearRemodAdd,năm,Cốt lõi,Thời gian từ lần cải tạo đến năm bán,Để NA khi năm cải tạo sau năm bán; giữ năm nguồn để đối chiếu
 TotalBath,"FullBath, HalfBath, BsmtFullBath, BsmtHalfBath",FullBath + BsmtFullBath + 0.5 * (HalfBath + BsmtHalfBath),phòng quy đổi,Cốt lõi,Gộp tiện nghi tắm ở cả trên và dưới đất,Thiếu thành phần thì NA; trọng số 0.5 là quy ước đặc trưng
-TotalOutdoorSF,"WoodDeckSF, OpenPorchSF, EnclosedPorch, 3SsnPorch, ScreenPorch",WoodDeckSF + OpenPorchSF + EnclosedPorch + 3SsnPorch + ScreenPorch,ft²,Cốt lõi,"Quy mô sàn gỗ và các loại hiên, không gồm hồ bơi",Thiếu thành phần thì NA; số 0 có sẵn được giữ nguyên
-HasGarage,"GarageCars, GarageArea",1 nếu GarageCars > 0 hoặc GarageArea > 0; 0 nếu cả hai = 0,0/1,Cốt lõi,Tách thông tin có garage khỏi quy mô garage,Không đủ bằng chứng có hoặc không có thì NA
-HasBsmt,TotalBsmtSF,1 nếu TotalBsmtSF > 0; 0 nếu = 0,0/1,Cốt lõi,Phân biệt không có hầm với hầm có diện tích khác nhau,"Diện tích thiếu hoặc âm thì NA, không tự gán 0"
-HasFireplace,Fireplaces,1 nếu Fireplaces > 0; 0 nếu = 0,0/1,Cốt lõi,Biểu diễn tiện nghi lò sưởi theo trạng thái có hay không,Số lượng thiếu hoặc âm thì NA
-HasRemodel,"YearBuilt, YearRemodAdd, YrSold",1 nếu YearRemodAdd > YearBuilt; 0 nếu bằng nhau,0/1,Cốt lõi,Phân biệt nhà đã cải tạo với nhà chưa cải tạo,Thiếu năm hoặc không thỏa YearBuilt <= YearRemodAdd <= YrSold thì NA
-HasPool,PoolArea,1 nếu PoolArea > 0; 0 nếu = 0,0/1,Thử thêm,Tách tiện nghi hồ bơi; cần kiểm tra độ hiếm trong CV,Diện tích thiếu hoặc âm thì NA
-Has2ndFloor,2ndFlrSF,1 nếu 2ndFlrSF > 0; 0 nếu = 0,0/1,Thử thêm,Phân biệt nhà có tầng hai,Diện tích thiếu hoặc âm thì NA
-GarageAge,"YrSold, GarageYrBlt, GarageCars, GarageArea",YrSold - GarageYrBlt khi HasGarage = 1,năm,Thử thêm,"Tuổi garage khi bán, có thể khác tuổi nhà","Không garage, thiếu năm hoặc tuổi âm thì NA; giữ HasGarage đi kèm"
-FinishedBsmtSF,"BsmtFinSF1, BsmtFinSF2",BsmtFinSF1 + BsmtFinSF2,ft²,Thử thêm,Quy mô phần tầng hầm đã hoàn thiện,Thiếu thành phần thì NA; không có hầm và số liệu đều 0 thì giữ 0
-FinishedBsmtRatio,"BsmtFinSF1, BsmtFinSF2, TotalBsmtSF",(BsmtFinSF1 + BsmtFinSF2) / TotalBsmtSF,tỷ lệ 0 đến 1,Thử thêm,"Tỷ lệ hoàn thiện tầng hầm, bổ sung thông tin ngoài tổng diện tích","Mẫu số <= 0, thiếu dữ liệu hoặc tỷ lệ > 1 thì NA; giữ HasBsmt"
-LivingLotRatio,"GrLivArea, LotArea",GrLivArea / LotArea,tỷ số,Thử thêm,Diện tích ở trên mặt đất tương đối với diện tích đất,LotArea <= 0 hoặc thiếu thì NA; tỷ số > 1 vẫn có thể hợp lệ
-GarageAreaPerCar,"GarageArea, GarageCars",GarageArea / GarageCars,ft²/xe,Thử thêm,Độ rộng garage trên mỗi chỗ xe,GarageCars <= 0 hoặc thiếu thì NA; giữ HasGarage đi kèm
-QualArea,"OverallQual, GrLivArea",OverallQual * GrLivArea,điểm × ft²,Thử thêm,"Tương tác chất lượng và quy mô, hữu ích để thử với Ridge","Thiếu dữ liệu, chất lượng ngoài 1 đến 10 hoặc diện tích âm thì NA"
-LogGrLivArea,GrLivArea,log1p(GrLivArea),log tự nhiên,Thử thêm,Thử quan hệ diện tích với giá ở thang log,Thiếu hoặc diện tích âm thì NA; không cần học tham số từ dữ liệu
-LogLotArea,LotArea,log1p(LotArea),log tự nhiên,Thử thêm,Giảm tác động của đuôi dài diện tích đất,Thiếu hoặc LotArea <= 0 thì NA
-MoSoldSin,MoSold,sin(2 * pi * (MoSold - 1) / 12),-1 đến 1,Thử thêm,Mã hóa mùa vụ; luôn thử cùng MoSoldCos,Tháng không nguyên hoặc ngoài 1 đến 12 thì NA
-MoSoldCos,MoSold,cos(2 * pi * (MoSold - 1) / 12),-1 đến 1,Thử thêm,Giữ tháng 12 và tháng 1 gần nhau theo chu kỳ,Tháng không nguyên hoặc ngoài 1 đến 12 thì NA
+TotalOutdoorSF,"WoodDeckSF, OpenPorchSF, EnclosedPorch, 3SsnPorch, ScreenPorch",WoodDeckSF + OpenPorchSF + EnclosedPorch + 3SsnPorch + ScreenPorch,ft²,Cốt lõi,Quy mô sàn gỗ và các loại hiên; không gồm hồ bơi,Thiếu thành phần thì NA; giữ số 0 có sẵn
+HasGarage,"GarageCars, GarageArea",1 nếu GarageCars > 0 hoặc GarageArea > 0; 0 nếu cả hai = 0,0/1,Cốt lõi,Tách trạng thái có garage khỏi quy mô garage,Hai cột nguồn không thiếu trên train; xử lý thiếu trước khi tạo cờ cho dữ liệu mới
+HasBsmt,TotalBsmtSF,1 nếu TotalBsmtSF > 0; 0 nếu = 0,0/1,Cốt lõi,Phân biệt nhà có tầng hầm và không có tầng hầm,Cột nguồn không thiếu trên train; 0 là không có hầm
+HasFireplace,Fireplaces,1 nếu Fireplaces > 0; 0 nếu = 0,0/1,Cốt lõi,Biểu diễn trạng thái có hoặc không có lò sưởi,Cột nguồn không thiếu trên train; 0 là không có lò sưởi
+HasRemodel,"YearBuilt, YearRemodAdd, YrSold",1 nếu YearRemodAdd > YearBuilt; 0 nếu bằng nhau,0/1,Cốt lõi,Phân biệt nhà đã cải tạo với nhà chưa cải tạo,Dòng có RemodelAge là NA cũng giữ HasRemodel là NA
+HasPool,PoolArea,1 nếu PoolArea > 0; 0 nếu = 0,0/1,Thử thêm,Tách tiện nghi hồ bơi; chú ý số căn có hồ bơi rất ít,Thử bằng CV cùng nhóm trạng thái tiện nghi
+Has2ndFloor,2ndFlrSF,1 nếu 2ndFlrSF > 0; 0 nếu = 0,0/1,Thử thêm,Phân biệt nhà có tầng hai,Thử bằng CV cùng nhóm trạng thái tiện nghi
+GarageAge,"YrSold, GarageYrBlt, GarageCars, GarageArea",YrSold - GarageYrBlt khi HasGarage = 1,năm,Thử thêm,Tuổi garage khi bán có thể khác tuổi nhà,Không garage thì NA; giữ HasGarage đi kèm
+FinishedBsmtSF,"BsmtFinSF1, BsmtFinSF2",BsmtFinSF1 + BsmtFinSF2,ft²,Thử thêm,Quy mô phần tầng hầm đã hoàn thiện,Giữ số 0 khi không có hầm; thiếu thành phần thì NA
+FinishedBsmtRatio,"BsmtFinSF1, BsmtFinSF2, TotalBsmtSF",(BsmtFinSF1 + BsmtFinSF2) / TotalBsmtSF,tỷ lệ,Thử thêm,Tỷ lệ hoàn thiện tầng hầm bổ sung thông tin ngoài tổng diện tích,Không có hầm thì NA để tránh chia cho 0; giữ HasBsmt
+LivingLotRatio,"GrLivArea, LotArea",GrLivArea / LotArea,tỷ số,Thử thêm,Diện tích ở tương đối với diện tích đất,Chỉ chia khi LotArea > 0; tỷ số có thể lớn hơn 1
+GarageAreaPerCar,"GarageArea, GarageCars",GarageArea / GarageCars,ft²/xe,Thử thêm,Độ rộng garage trên mỗi chỗ xe,Không garage thì NA để tránh chia cho 0; giữ HasGarage
+QualArea,"OverallQual, GrLivArea",OverallQual * GrLivArea,điểm × ft²,Thử thêm,Tương tác giữa chất lượng và quy mô diện tích,Thử với Ridge và so sánh với biến gốc bằng CV
+LogGrLivArea,GrLivArea,log1p(GrLivArea),log tự nhiên,Thử thêm,Thử biểu diễn diện tích ở trên thang log,So sánh bằng CV với cách dùng diện tích gốc
+LogLotArea,LotArea,log1p(LotArea),log tự nhiên,Thử thêm,Giảm tác động của đuôi dài diện tích đất,So sánh bằng CV với cách dùng diện tích đất gốc
+MoSoldSin,MoSold,sin(2 * pi * (MoSold - 1) / 12),-1 đến 1,Thử thêm,Mã hóa mùa vụ bán nhà,Luôn thử cùng MoSoldCos để biểu diễn chu kỳ
+MoSoldCos,MoSold,cos(2 * pi * (MoSold - 1) / 12),-1 đến 1,Thử thêm,Giữ tháng 12 và tháng 1 gần nhau theo chu kỳ,Luôn thử cùng MoSoldSin thay cho one-hot tháng
