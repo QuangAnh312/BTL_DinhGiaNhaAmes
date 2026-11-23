@@ -29,12 +29,16 @@ cd BTL_DinhGiaNhaAmes/03_SourceCode
 ## Bước 4. Tạo môi trường + tải dữ liệu
 
 ```bash
-python -m venv .venv
+python --version                  # phải là 3.11.x
+python -m venv .venv              # máy có nhiều bản Python: py -3.11 -m venv .venv
 .venv\Scripts\activate            # Windows
 # source .venv/bin/activate       # macOS/Linux
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
-- Trong VS Code chọn kernel `.venv` khi mở notebook.
+- **Phải nâng cấp pip trước khi cài.** pip 24.0 đi kèm Python 3.11 đọc `requirements.txt`
+  bằng bảng mã Windows nên lỗi `UnicodeDecodeError` (do file có comment tiếng Việt).
+- Trong VS Code chọn kernel `.venv` khi mở notebook. Nếu xóa/tạo lại `.venv` thì phải chọn lại kernel.
 - Tải `train.csv` và `data_description.txt` theo `data/README.md`, đặt vào `data/raw/`.
 
 ## Bước 5. Kiểm tra
