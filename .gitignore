@@ -28,3 +28,8 @@ Thumbs.db
 
 # Office temp
 ~$*
+
+# Output files
+03_SourceCode/output/
+03_SourceCode/du_doan*.csv
+03_SourceCode/predictions*.csv

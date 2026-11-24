@@ -4,6 +4,7 @@
 - MissingHandler: học (median LotFrontage theo khu, mode) từ train trong fit().
 - OrdinalMapper, FeatureAdder: không học gì từ dữ liệu, không gây rò rỉ.
 """
+
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -15,14 +16,33 @@ NUM_BUT_CAT = ["MSSubClass", "MoSold", "YrSold"]
 # ---- Missing loại A: NA nghĩa là "không có" (theo data_description.txt) ----
 # Cột phân loại: NA -> "None"
 NONE_CAT_COLS = [
-    "Alley", "BsmtQual", "BsmtCond", "BsmtExposure", "BsmtFinType1",
-    "BsmtFinType2", "FireplaceQu", "GarageType", "GarageFinish", "GarageQual",
-    "GarageCond", "PoolQC", "Fence", "MiscFeature", "MasVnrType",
+    "Alley",
+    "BsmtQual",
+    "BsmtCond",
+    "BsmtExposure",
+    "BsmtFinType1",
+    "BsmtFinType2",
+    "FireplaceQu",
+    "GarageType",
+    "GarageFinish",
+    "GarageQual",
+    "GarageCond",
+    "PoolQC",
+    "Fence",
+    "MiscFeature",
+    "MasVnrType",
 ]
 # Cột số tương ứng: NA -> 0
 ZERO_NUM_COLS = [
-    "MasVnrArea", "BsmtFinSF1", "BsmtFinSF2", "BsmtUnfSF", "TotalBsmtSF",
-    "BsmtFullBath", "BsmtHalfBath", "GarageCars", "GarageArea",
+    "MasVnrArea",
+    "BsmtFinSF1",
+    "BsmtFinSF2",
+    "BsmtUnfSF",
+    "TotalBsmtSF",
+    "BsmtFullBath",
+    "BsmtHalfBath",
+    "GarageCars",
+    "GarageArea",
 ]
 
 # ---- Missing loại B: khuyết thật ----
@@ -37,15 +57,37 @@ ORDINAL_MAPS = {
     **{
         c: _QUAL
         for c in [
-            "ExterQual", "ExterCond", "BsmtQual", "BsmtCond", "HeatingQC",
-            "KitchenQual", "FireplaceQu", "GarageQual", "GarageCond", "PoolQC",
+            "ExterQual",
+            "ExterCond",
+            "BsmtQual",
+            "BsmtCond",
+            "HeatingQC",
+            "KitchenQual",
+            "FireplaceQu",
+            "GarageQual",
+            "GarageCond",
+            "PoolQC",
         ]
     },
     "BsmtExposure": {"None": 0, "No": 1, "Mn": 2, "Av": 3, "Gd": 4},
-    "BsmtFinType1": {"None": 0, "Unf": 1, "LwQ": 2, "Rec": 3, "BLQ": 4,
-                     "ALQ": 5, "GLQ": 6},
-    "BsmtFinType2": {"None": 0, "Unf": 1, "LwQ": 2, "Rec": 3, "BLQ": 4,
-                     "ALQ": 5, "GLQ": 6},
+    "BsmtFinType1": {
+        "None": 0,
+        "Unf": 1,
+        "LwQ": 2,
+        "Rec": 3,
+        "BLQ": 4,
+        "ALQ": 5,
+        "GLQ": 6,
+    },
+    "BsmtFinType2": {
+        "None": 0,
+        "Unf": 1,
+        "LwQ": 2,
+        "Rec": 3,
+        "BLQ": 4,
+        "ALQ": 5,
+        "GLQ": 6,
+    },
     "GarageFinish": {"None": 0, "Unf": 1, "RFn": 2, "Fin": 3},
     "CentralAir": {"N": 0, "Y": 1},
 }
@@ -99,9 +141,9 @@ class MissingHandler(BaseEstimator, TransformerMixin):
             if "Neighborhood" in X.columns:
                 fill = X["Neighborhood"].map(self.lot_by_nbhd_).astype(float)
             fill = fill.fillna(self.lot_median_)
-            X["LotFrontage"] = pd.to_numeric(
-                X["LotFrontage"], errors="coerce"
-            ).fillna(fill)
+            X["LotFrontage"] = pd.to_numeric(X["LotFrontage"], errors="coerce").fillna(
+                fill
+            )
 
         # Loại A: NA = "không có"
         for c in NONE_CAT_COLS:

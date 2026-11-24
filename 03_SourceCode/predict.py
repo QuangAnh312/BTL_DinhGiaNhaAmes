@@ -27,10 +27,11 @@ def load_model(model_path: Union[str, Path] = DEFAULT_MODEL_PATH):
     """Nạp mô hình đã đóng gói từ file joblib."""
     path = Path(model_path)
     if not path.exists():
-        raise FileNotFoundError(
+        msg = (
             f"Không tìm thấy mô hình tại '{path}'. "
-            "Vui lòng chạy 'python train/train_demo.py' trước để huấn luyện và đóng gói mô hình."
+            "Vui lòng chạy 'python train/train_demo.py' trước để huấn luyện."
         )
+        raise FileNotFoundError(msg)
     return joblib.load(path)
 
 
@@ -38,7 +39,7 @@ def predict(
     data: Union[pd.DataFrame, dict, list],
     model_path: Union[str, Path] = DEFAULT_MODEL_PATH,
 ) -> pd.Series:
-    """Nhận dữ liệu thô (DataFrame hoặc Dict), trả về Series giá dự đoán SalePrice (USD)."""
+    """Dự đoán giá nhà từ dữ liệu thô (DataFrame hoặc Dict), trả về USD."""
     if isinstance(data, dict):
         df = pd.DataFrame([data])
     elif isinstance(data, list):
