@@ -97,6 +97,7 @@ BTL_DinhGiaNhaAmes/
 - Tỷ lệ đóng góp mặc định 20%/người, chốt lại trước khi nộp dựa trên commit + công việc thực tế, **cả nhóm ký xác nhận**.
 - Mỗi người phải tự chạy lại được 2 notebook và giải thích được mọi bước để chuẩn bị vấn đáp.
 - Tài liệu tham khảo: ai dùng nguồn nào (bài báo, tài liệu scikit-learn…) thì gửi Tiến Quang ghi vào danh sách chung ngay khi dùng.
+- Đề xuất đặc trưng và bảng nhóm biến của Hoàng Anh: [tài liệu bàn giao](01_Report/HoangAnh/De_xuat_dac_trung_va_nhom_bien.md), [notebook nháp](03_SourceCode/notebooks/drafts/03_Feature_Proposal_HoangAnh.ipynb).
 
 ---
 

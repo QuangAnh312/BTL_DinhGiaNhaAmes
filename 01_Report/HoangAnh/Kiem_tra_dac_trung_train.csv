@@ -1,0 +1,10 @@
+﻿dac_trung,so_dong_train,so_thieu,nho_nhat,trung_vi,lon_nhat
+TotalSF,1168,0,334.0,2494.0,11752.0
+HouseAge,1168,0,0.0,35.0,136.0
+RemodelAge,1168,1,0.0,14.0,60.0
+TotalBath,1168,0,1.0,2.0,6.0
+TotalOutdoorSF,1168,0,0.0,168.0,1027.0
+HasGarage,1168,0,0.0,1.0,1.0
+HasBsmt,1168,0,0.0,1.0,1.0
+HasFireplace,1168,0,0.0,1.0,1.0
+HasRemodel,1168,1,0.0,0.0,1.0

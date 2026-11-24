@@ -1,0 +1,80 @@
+﻿bien,nhom,y_nghia,kieu_trong_csv,kieu_ngu_nghia,tien_xu_ly_de_xuat,xu_ly_thieu,so_thieu_train,ty_le_thieu_train_pct
+MSSubClass,Loại hình nhà,"Mã loại nhà; số là nhãn, không phải đại lượng liên tục",Số,Mã phân loại,"Đổi sang chuỗi, one-hot; không scale mã số","Thiếu thành Unknown sau đổi chuỗi; hoặc mode trong fold, không median mã",0,0.0
+MSZoning,Vị trí và lô đất,Phân vùng sử dụng đất,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+LotFrontage,Vị trí và lô đất,"Chiều dài mặt tiền tiếp giáp đường, feet",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,Median trong fold; median theo Neighborhood cũng phải fit trong fold,217,18.58
+LotArea,Vị trí và lô đất,"Diện tích lô đất, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+Street,Vị trí và lô đất,Loại mặt đường,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Alley,Vị trí và lô đất,Loại đường ngõ; NA theo mô tả là không có ngõ,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",NA thành None theo mô tả dữ liệu; giữ trạng thái không có,1094,93.66
+LotShape,Vị trí và lô đất,Hình dạng lô đất,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+LandContour,Vị trí và lô đất,Địa hình lô đất,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Utilities,Hệ thống và tiện nghi trong nhà,Các dịch vụ hạ tầng được cung cấp,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+LotConfig,Vị trí và lô đất,Vị trí và cách bố trí lô đất,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+LandSlope,Vị trí và lô đất,Mức độ dốc của đất,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Neighborhood,Vị trí và lô đất,Khu phố trong Ames,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Condition1,Vị trí và lô đất,Điều kiện lân cận chính như đường lớn hoặc đường sắt,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Condition2,Vị trí và lô đất,Điều kiện lân cận bổ sung,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+BldgType,Loại hình nhà,Loại công trình nhà ở,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+HouseStyle,Loại hình nhà,Kiểu nhà và số tầng,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+OverallQual,Chất lượng và kết cấu,"Điểm chất lượng vật liệu và hoàn thiện, 1 đến 10",Số,Điểm thứ bậc 1 đến 10,Giữ điểm số; impute và scale trong fold,"Điểm nguyên 1–10; sai thành NA; impute trong fold, không mặc định 0",0,0.0
+OverallCond,Chất lượng và kết cấu,"Điểm tình trạng chung, 1 đến 10",Số,Điểm thứ bậc 1 đến 10,Giữ điểm số; impute và scale trong fold,"Điểm nguyên 1–10; sai thành NA; impute trong fold, không mặc định 0",0,0.0
+YearBuilt,Thời gian,Năm xây dựng ban đầu,Số,Năm,Tính tuổi theo YrSold; median trong fold khi thiếu,Năm nguyên dương; sai thành NA; tính tuổi trước impute trong fold,0,0.0
+YearRemodAdd,Thời gian,Năm cải tạo; bằng năm xây nếu không cải tạo,Số,Năm,Tính tuổi theo YrSold; median trong fold khi thiếu,Năm nguyên dương; sai thành NA; tính tuổi trước impute trong fold,0,0.0
+RoofStyle,Chất lượng và kết cấu,Kiểu mái,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+RoofMatl,Chất lượng và kết cấu,Vật liệu mái,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Exterior1st,Chất lượng và kết cấu,Vật liệu bên ngoài chính,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Exterior2nd,Chất lượng và kết cấu,Vật liệu bên ngoài bổ sung,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+MasVnrType,Chất lượng và kết cấu,Loại ốp gạch đá; chuỗi None là không ốp,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Giữ chuỗi None; NA thật thành Unknown hoặc mode học trong fold,6,0.51
+MasVnrArea,Chất lượng và kết cấu,"Diện tích ốp gạch đá, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,NA và MasVnrType=None có thể điền 0; còn lại median trong fold,6,0.51
+ExterQual,Chất lượng và kết cấu,Chất lượng vật liệu bên ngoài,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+ExterCond,Chất lượng và kết cấu,Tình trạng vật liệu bên ngoài,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Foundation,Chất lượng và kết cấu,Loại móng,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+BsmtQual,Tầng hầm,Đánh giá chiều cao tầng hầm,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,28,2.4
+BsmtCond,Tầng hầm,Tình trạng tầng hầm,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,28,2.4
+BsmtExposure,Tầng hầm,Mức độ có mặt thoáng của tầng hầm,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,28,2.4
+BsmtFinType1,Tầng hầm,Mức hoàn thiện khu vực tầng hầm thứ nhất,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,28,2.4
+BsmtFinSF1,Tầng hầm,"Diện tích tầng hầm hoàn thiện loại thứ nhất, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+BsmtFinType2,Tầng hầm,Mức hoàn thiện khu vực tầng hầm thứ hai,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,28,2.4
+BsmtFinSF2,Tầng hầm,"Diện tích tầng hầm hoàn thiện loại thứ hai, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+BsmtUnfSF,Tầng hầm,"Diện tích tầng hầm chưa hoàn thiện, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+TotalBsmtSF,Tầng hầm,"Tổng diện tích tầng hầm, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+Heating,Hệ thống và tiện nghi trong nhà,Loại hệ thống sưởi,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+HeatingQC,Hệ thống và tiện nghi trong nhà,Chất lượng và tình trạng hệ thống sưởi,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+CentralAir,Hệ thống và tiện nghi trong nhà,Có điều hòa trung tâm hay không,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Electrical,Hệ thống và tiện nghi trong nhà,Loại hệ thống điện,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,1,0.09
+1stFlrSF,Diện tích và phòng trên mặt đất,"Diện tích tầng một, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+2ndFlrSF,Diện tích và phòng trên mặt đất,"Diện tích tầng hai, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+LowQualFinSF,Diện tích và phòng trên mặt đất,"Diện tích hoàn thiện chất lượng thấp ở mọi tầng, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+GrLivArea,Diện tích và phòng trên mặt đất,"Diện tích ở trên mặt đất, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+BsmtFullBath,Tầng hầm,Số phòng tắm đầy đủ dưới tầng hầm,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+BsmtHalfBath,Tầng hầm,Số phòng vệ sinh không đầy đủ dưới tầng hầm,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+FullBath,Phòng tắm trên mặt đất,Số phòng tắm đầy đủ trên mặt đất,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+HalfBath,Phòng tắm trên mặt đất,Số phòng vệ sinh không đầy đủ trên mặt đất,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+BedroomAbvGr,Diện tích và phòng trên mặt đất,Số phòng ngủ trên mặt đất,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+KitchenAbvGr,Diện tích và phòng trên mặt đất,Số bếp trên mặt đất,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+KitchenQual,Diện tích và phòng trên mặt đất,Chất lượng bếp,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+TotRmsAbvGrd,Diện tích và phòng trên mặt đất,"Tổng số phòng trên mặt đất, không tính phòng tắm",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+Functional,Hệ thống và tiện nghi trong nhà,Mức độ đáp ứng chức năng của nhà,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+Fireplaces,Hệ thống và tiện nghi trong nhà,Số lò sưởi,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+FireplaceQu,Hệ thống và tiện nghi trong nhà,Chất lượng lò sưởi; NA có thể là không có lò,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,547,46.83
+GarageType,Garage và lối xe,Loại và vị trí garage,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",NA thành None khi xác định không có hạng mục; còn lại Unknown,64,5.48
+GarageYrBlt,Thời gian,Năm xây garage,Số,Năm,Tính tuổi theo YrSold; median trong fold khi thiếu,Năm nguyên dương; không garage thì NA; không gán 0; giữ HasGarage,64,5.48
+GarageFinish,Garage và lối xe,Mức hoàn thiện bên trong garage,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,64,5.48
+GarageCars,Garage và lối xe,Sức chứa garage theo số xe,Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+GarageArea,Garage và lối xe,"Diện tích garage, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+GarageQual,Garage và lối xe,Chất lượng garage,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,64,5.48
+GarageCond,Garage và lối xe,Tình trạng garage,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,64,5.48
+PavedDrive,Garage và lối xe,Mức độ trải mặt lối xe vào,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+WoodDeckSF,Không gian ngoài trời,"Diện tích sàn gỗ ngoài trời, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+OpenPorchSF,Không gian ngoài trời,"Diện tích hiên mở, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+EnclosedPorch,Không gian ngoài trời,"Diện tích hiên kín, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+3SsnPorch,Không gian ngoài trời,"Diện tích hiên dùng ba mùa, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+ScreenPorch,Không gian ngoài trời,"Diện tích hiên có lưới, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+PoolArea,Không gian ngoài trời,"Diện tích hồ bơi, ft²",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+PoolQC,Không gian ngoài trời,Chất lượng hồ bơi; NA có thể là không có hồ,Nhãn,Nhãn có thứ bậc,Baseline one-hot; ordinal khi chốt thứ tự,NA thành None khi xác định không có hạng mục; còn lại Unknown,1162,99.49
+Fence,Không gian ngoài trời,Loại và chất lượng hàng rào; NA là không có,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",NA thành None theo mô tả dữ liệu; giữ trạng thái không có,935,80.05
+MiscFeature,Hạng mục khác,Hạng mục phụ khác; NA là không có theo mô tả,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold","NA thành None theo mô tả; đối chiếu MiscVal, không suy có/không chỉ từ giá",1122,96.06
+MiscVal,Hạng mục khác,"Giá trị quy đổi của hạng mục phụ, USD; không phải giá bán nhà",Số,Đại lượng hoặc số đếm,Median trong fold; scale cho Ridge/KNN,"Giữ 0 đã ghi; thiếu thật dùng median trong fold, không mặc định 0",0,0.0
+MoSold,Thời gian,"Tháng bán, 1 đến 12; có tính chu kỳ",Số,Tháng có chu kỳ,Baseline one-hot; thử cặp sin/cos theo CV,"Chỉ tháng nguyên 1–12; sai thành NA; one-hot dùng Unknown, sin/cos giữ NA",0,0.0
+YrSold,Thời gian,Năm bán; mốc thời gian tính tuổi nhà,Số,Năm,Tính tuổi theo YrSold; median trong fold khi thiếu,Năm nguyên dương; sai thành NA; tính tuổi trước impute trong fold,0,0.0
+SaleType,Điều kiện giao dịch,Hình thức giao dịch bán,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
+SaleCondition,Điều kiện giao dịch,Điều kiện giao dịch,Nhãn,Phân loại,"One-hot, handle_unknown='ignore'; fit trong fold",Unknown hoặc most_frequent học trong fold; không xóa dòng,0,0.0
