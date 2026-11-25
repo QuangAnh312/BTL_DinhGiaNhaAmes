@@ -114,7 +114,7 @@ Lớp học **thứ 4 hằng tuần**: Buổi 2 = 18/11 · Buổi 3 = 25/11 · B
 | T7–T2 21–23/11 | Khung `Pipeline` + `ColumnTransformer` (num: impute + scale; cat: impute + one-hot) | Hinh |
 | T7–T2 21–23/11 | Đề xuất đặc trưng mới (TotalSF, HouseAge, TotalBath…), soạn bảng nhóm biến | Hoàng Anh |
 | T2–T3 23–24/11 | EDA: tương quan, biểu đồ theo `Neighborhood`/`OverallQual`; chốt chiến lược tiền xử lý | Tuấn Anh |
-| **T4 25/11 (Buổi 3)** | Họp trên lớp: review EDA, chốt chiến lược tiền xử lý | Cả nhóm |
+| **T4 25/11 (Buổi 3)** | Họp trên lớp: review EDA, chốt chiến lược tiền xử lý → [biên bản + việc phát sinh](docs/Bien_ban_hop_25_11.md) | Cả nhóm |
 | T4–T5 25–26/11 | Baseline `DummyRegressor` + `Ridge` trong Pipeline, 5-Fold CV, bảng RMSE/MAE/R²/RMSLE | Hinh |
 | T4–T5 25–26/11 | Báo cáo tiến độ 01 (sơ đồ EDA + chiến lược tiền xử lý, 3–5 trang) | Tiến Quang (tổng hợp từ Tuấn Anh, Hinh) |
 | **T6 27/11** | Review leakage, notebook chạy *Restart & Run All*, merge `main` | Quang Anh |
