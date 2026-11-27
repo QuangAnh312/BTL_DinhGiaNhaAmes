@@ -19,21 +19,22 @@ Hệ thống pipeline học máy hoàn chỉnh cho bài toán định giá bất
 │   └── train_demo.py                       # Script so sánh 7 mô hình qua 5-Fold CV & xuất joblib
 ├── notebooks/
 │   ├── 01_EDA_Preprocessing.ipynb          # Khám phá dữ liệu và tiền xử lý (Tuấn Anh)
-│   ├── 02_Modeling_Evaluation.ipynb         # Đánh giá mô hình & 5-Fold CV (Hinh)
+│   ├── 02_Modeling_Evaluation.ipynb        # Đánh giá mô hình & 5-Fold CV (Hinh)
 │   └── drafts/                             # Bản nháp thử nghiệm đặc trưng
 ├── src/
 │   ├── __init__.py                         # Export module dùng chung
-│   ├── data.py                             # Hàm nạp và phân chia train/test cố định, lọc ngoại lai
+│   ├── data.py                             # Hàm nạp, chia train/test cố định, remove_outliers()
 │   ├── transformers.py                     # MissingHandler, OrdinalMapper, FeatureAdder
 │   ├── pipeline.py                         # build_pipeline(), build_preprocessor(), get_models()
 │   └── plots.py                            # plot_model_evaluation() vẽ biểu đồ 4 góc
 ├── app/
 │   └── app.py                              # Demo Webapp Streamlit
 ├── predict.py                              # CLI & hàm suy luận cho dữ liệu CSV mới
+├── .flake8                                 # Cấu hình kiểm tra chuẩn PEP8
 └── requirements.txt                        # Danh sách thư viện cần thiết
 ```
 
-*Tài liệu kỹ thuật và báo cáo được lưu trữ tại thư mục `docs/` ở gốc dự án (ví dụ: `docs/Demo.md`, `docs/Huong_xu_ly_du_lieu_va_cap_nhat_Pipeline.docx`).*
+*Tài liệu kỹ thuật và biên bản họp được lưu trữ tại thư mục `docs/` ở gốc dự án (ví dụ: `docs/Demo.md`, `docs/Bien_ban_hop_25_11.md`).*
 
 ---
 
@@ -42,17 +43,21 @@ Hệ thống pipeline học máy hoàn chỉnh cho bài toán định giá bất
 Toàn bộ quá trình tiền xử lý và học máy được tích hợp trong một đối tượng `TransformedTargetRegressor(Pipeline)`:
 
 1. **`MissingHandler`**:
-   - **Nhóm A (NA = "None" / 0)**: 15 cột phân loại (`PoolQC`, `GarageType`, `BsmtQual`...) điền `"None"`; 9 cột số tương ứng (`GarageArea`, `TotalBsmtSF`...) điền `0`. `GarageYrBlt` điền bằng `YearBuilt`.
+   - **Nhóm A (NA = "None" / 0)**: 15 cột phân loại (`PoolQC`, `GarageType`, `BsmtQual`, `BsmtFinType1/2`...) điền `"None"`; 9 cột số tương ứng (`GarageArea`, `TotalBsmtSF`...) điền `0`. `GarageYrBlt` điền bằng `YearBuilt`.
    - **Nhóm B (Khuyết thật)**: `LotFrontage` điền median theo từng khu `Neighborhood` (học từ fold train; khu lạ fallback về median chung). `Electrical`, `BsmtExposure`, `BsmtFinType2` điền mode học từ fold train (riêng tầng hầm chỉ điền mode khi nhà có tầng hầm).
-2. **`OrdinalMapper` (Tùy chọn)**: Mã hóa thứ bậc 12 cột chất lượng (`ExterQual`, `KitchenQual`, `BsmtQual`, `GarageFinish`...) thành thang điểm nguyên $0 \to 5$.
+2. **`OrdinalMapper`** (bước `"ordinal"`, dùng `"passthrough"` khi `ordinal=False` để phục vụ tuning):
+   - Mã hóa thứ bậc **12 cột** chất lượng (`ExterQual`, `ExterCond`, `BsmtQual`, `BsmtCond`, `HeatingQC`, `KitchenQual`, `FireplaceQu`, `GarageQual`, `GarageCond`, `BsmtExposure`, `GarageFinish`, `CentralAir`).
+   - `BsmtFinType1` và `BsmtFinType2` giữ nguyên dạng chuỗi để đi vào nhánh One-Hot Encoding.
 3. **`FeatureAdder` (Feature Engineering)**:
    - Tạo các cột tổng hợp: `TotalSF`, `HouseAge` (kẹp $\ge 0$), `RemodAge`, `TotalBath`, `TotalPorchSF`.
    - Cờ nhị phân: `HasPool`, `Has2ndFloor`, `HasGarage`, `HasFireplace`.
    - Ép kiểu phân loại cho cột số nhãn: `MSSubClass`, `MoSold`, `YrSold`.
-4. **`ColumnTransformer`**:
-   - Nhánh số: `SimpleImputer(median)` $\to$ `StandardScaler()`.
-   - Nhánh phân loại: `SimpleImputer("None")` $\to$ `OneHotEncoder(min_frequency=0.01, sparse_output=False)`.
-5. **Mô hình hồi quy** (Dummy, Ridge, Lasso, KNN, DecisionTree, RandomForest, HistGradientBoosting) được bọc trong `TransformedTargetRegressor(func=np.log1p, inverse_func=np.expm1)` để tối ưu chuẩn độ đo RMSLE và tự động chuyển về đơn vị USD khi dự đoán.
+   - Bỏ cột `PoolQC` sau khi tạo `HasPool` (vì 1.453/1.460 căn không có hồ bơi).
+4. **`ColumnTransformer`** (3 nhánh theo thứ tự `num`, `cat`, `log`):
+   - **Nhánh `num`** (các cột số trừ `SKEWED_COLS`): `SimpleImputer(median)` $\to$ `StandardScaler()`.
+   - **Nhánh `cat`** (các cột phân loại, bao gồm `BsmtFinType1/2`): `SimpleImputer("None")` $\to$ `OneHotEncoder(handle_unknown="ignore", min_frequency=0.01, sparse_output=False)`.
+   - **Nhánh `log`** (8 biến lệch phải `SKEWED_COLS`: `LotArea`, `GrLivArea`, `1stFlrSF`, `LotFrontage`, `OpenPorchSF`, `MasVnrArea`, `WoodDeckSF`, `2ndFlrSF`): `SimpleImputer(median)` $\to$ `FunctionTransformer(np.log1p, feature_names_out="one-to-one")` $\to$ `StandardScaler()`.
+5. **Mô hình hồi quy** (`Dummy`, `Ridge`, `Lasso`, `KNN`, `DecisionTree`, `RandomForest`, `HistGradientBoosting`) được bọc trong `TransformedTargetRegressor(func=np.log1p, inverse_func=np.expm1)` để tối ưu chuẩn độ đo RMSLE và tự động chuyển về đơn vị USD khi dự đoán.
 
 ---
 
@@ -76,19 +81,19 @@ pip install -r requirements.txt
 Chạy đánh giá so sánh 7 mô hình bằng **5-Fold Cross Validation** trên tập train và lưu mô hình tối ưu vào `models/best_model.joblib`:
 
 ```bash
-# Chạy với mã hóa thứ bậc Ordinal (mặc định)
+# Chạy với mã hóa thứ bậc Ordinal (mặc định: Lasso RMSLE 0.1086, Ridge 0.1101)
 python train/train_demo.py
 
-# Chạy với One-Hot Encoding cho toàn bộ cột chất lượng (để so sánh)
+# Chạy với "passthrough" ở bước ordinal để one-hot toàn bộ cột chất lượng
 python train/train_demo.py --no-ordinal
 ```
 
 ### 4.2. Khám phá và đánh giá trên Notebook (`notebooks/02_Modeling_Evaluation.ipynb`)
 
 Mở notebook `notebooks/02_Modeling_Evaluation.ipynb` để theo dõi chi tiết:
-- Sơ đồ Pipeline 5 bước.
+- Sơ đồ Pipeline 5 bước (kèm 3 nhánh `num`, `cat`, `log`).
 - Bảng kết quả 5-Fold Cross Validation định lượng trên tập train sạch (1.165 dòng).
-- Bảng so sánh giữa Ordinal Encoding và One-Hot Encoding.
+- Bảng đối chứng giữa `OrdinalMapper` và `"passthrough"` (One-Hot Encoding).
 - Nhận xét chi tiết phục vụ viết báo cáo kỹ thuật.
 
 ### 4.3. Suy luận dữ liệu mới (`predict.py`)
@@ -106,7 +111,7 @@ Sử dụng trong mã Python / Notebook / Streamlit:
 import pandas as pd
 from predict import predict
 
-df = pd.read_csv("data/raw/train.csv")
+df = pd.read_csv("data/raw/train.csv", keep_default_na=False, na_values=["NA", ""])
 predictions = predict(df)  # Trả về pd.Series giá nhà USD
 print(predictions.head())
 ```

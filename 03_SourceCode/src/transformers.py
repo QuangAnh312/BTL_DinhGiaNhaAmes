@@ -66,28 +66,9 @@ ORDINAL_MAPS = {
             "FireplaceQu",
             "GarageQual",
             "GarageCond",
-            "PoolQC",
         ]
     },
     "BsmtExposure": {"None": 0, "No": 1, "Mn": 2, "Av": 3, "Gd": 4},
-    "BsmtFinType1": {
-        "None": 0,
-        "Unf": 1,
-        "LwQ": 2,
-        "Rec": 3,
-        "BLQ": 4,
-        "ALQ": 5,
-        "GLQ": 6,
-    },
-    "BsmtFinType2": {
-        "None": 0,
-        "Unf": 1,
-        "LwQ": 2,
-        "Rec": 3,
-        "BLQ": 4,
-        "ALQ": 5,
-        "GLQ": 6,
-    },
     "GarageFinish": {"None": 0, "Unf": 1, "RFn": 2, "Fin": 3},
     "CentralAir": {"N": 0, "Y": 1},
 }
@@ -184,7 +165,7 @@ class FeatureAdder(BaseEstimator, TransformerMixin):
     """Tạo đặc trưng mới từ dữ liệu thô của Ames Housing.
 
     Input : DataFrame thô (đã bỏ Id, SalePrice).
-    Output: DataFrame có thêm cột mới; các cột NUM_BUT_CAT đã ép sang str.
+    Output: DataFrame có thêm cột mới; các cột NUM_BUT_CAT đã ép sang str; bỏ PoolQC.
     """
 
     def fit(self, X, y=None):
@@ -237,4 +218,7 @@ class FeatureAdder(BaseEstimator, TransformerMixin):
                     .apply(lambda v: str(int(v)) if pd.notna(v) else np.nan)
                     .astype("object")
                 )
+
+        # PoolQC: 1.453/1.460 căn không có hồ bơi -> chỉ giữ cờ HasPool
+        X = X.drop(columns=["PoolQC"], errors="ignore")
         return X
